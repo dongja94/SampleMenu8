@@ -1,9 +1,10 @@
 package com.example.dongja94.samplemenu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText keywordView;
 
+    ShareActionProvider mActionProvider;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -37,20 +40,31 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(MainActivity.this, "Keyword : " + keyword, Toast.LENGTH_SHORT).show();
 //            }
 //        });
-        SearchView view = (SearchView) MenuItemCompat.getActionView(item);
-        view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, "Query : " + query , Toast.LENGTH_SHORT).show();
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+//        SearchView view = (SearchView) MenuItemCompat.getActionView(item);
+//        view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                Toast.makeText(MainActivity.this, "Query : " + query , Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+
+        item = menu.findItem(R.id.menu_item3);
+        mActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        doShareAction();
         return true;
+    }
+
+    private void doShareAction() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+        mActionProvider.setShareIntent(intent);
     }
 
     @Override
@@ -59,17 +73,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_item1 :
                 Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.menu_item2 :
-                Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.menu_item3 :
-                Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.sub_item1 :
-            case R.id.sub_item2 :
-            case R.id.sub_item3 :
-                Toast.makeText(this, "Sub Menu : " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
+//            case R.id.menu_item2 :
+//                Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.menu_item3 :
+//                Toast.makeText(this, "Menu 3", Toast.LENGTH_SHORT).show();
+//                return true;
+//            case R.id.sub_item1 :
+//            case R.id.sub_item2 :
+//            case R.id.sub_item3 :
+//                Toast.makeText(this, "Sub Menu : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+//                return true;
         }
         return super.onOptionsItemSelected(item);
     }

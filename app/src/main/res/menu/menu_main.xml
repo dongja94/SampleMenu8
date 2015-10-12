@@ -6,7 +6,9 @@
         android:orderInCategory="100"
         android:icon="@android:drawable/ic_input_add"
         app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView"/>
+        app:actionLayout="@layout/menu_layout"
+       />
+<!--
     <item android:id="@+id/menu_item2"
         android:title="M2"
         android:orderInCategory="101"
@@ -24,8 +26,11 @@
                 android:orderInCategory="202" />
         </menu>
     </item>
+-->
     <item android:id="@+id/menu_item3"
         android:title="M3"
         android:orderInCategory="102"
-        android:icon="@android:drawable/ic_input_get" />
+        android:icon="@android:drawable/ic_input_get"
+        app:showAsAction="always"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
 </menu>
